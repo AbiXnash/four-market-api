@@ -1,6 +1,9 @@
 package `in`.abx.auth.dto
 
+import `in`.abx.auth.domain.JwtToken
+
 data class LoginResponseDTO(
-    val accessToken: String,
-    val refreshToken: String,
+    val userId: String,
+    val username: String,
+    val jwtToken: JwtToken
 )

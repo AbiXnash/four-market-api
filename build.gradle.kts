@@ -35,13 +35,12 @@ dependencies {
         "com.dbeaver.jdbc:com.dbeaver.jdbc.driver.libsql:1.0.4"
     )
 
-    compileOnly(
-        "org.projectlombok:lombok"
-    )
+    implementation("io.jsonwebtoken:jjwt-api:0.13.0")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.13.0")
 
-    annotationProcessor(
-        "org.projectlombok:lombok"
-    )
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 
     testImplementation(
         "org.springframework.boot:spring-boot-starter-test"
