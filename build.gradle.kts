@@ -27,6 +27,22 @@ dependencies {
         "org.jetbrains.kotlin:kotlin-reflect"
     )
 
+    implementation(
+        "org.apache.commons:commons-lang3"
+    )
+
+    implementation(
+        "com.dbeaver.jdbc:com.dbeaver.jdbc.driver.libsql:1.0.4"
+    )
+
+    compileOnly(
+        "org.projectlombok:lombok"
+    )
+
+    annotationProcessor(
+        "org.projectlombok:lombok"
+    )
+
     testImplementation(
         "org.springframework.boot:spring-boot-starter-test"
     )

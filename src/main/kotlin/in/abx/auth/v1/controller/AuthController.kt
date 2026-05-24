@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1/auth")
-class AuthController
+class AuthController {
 
-@GetMapping("/login")
-fun home(): ResponseEntity<String> {
-    return ResponseEntity.ok("")
+    @GetMapping("/login")
+    fun home(): ResponseEntity<String> {
+        return ResponseEntity.ok("")
+    }
 }
