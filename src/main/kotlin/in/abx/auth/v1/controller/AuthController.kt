@@ -21,6 +21,11 @@ class AuthController(
             LoggerFactory.getLogger(AuthController::class.java)
     }
 
+    @PostMapping("/csrf")
+    fun csrfRoute(): ResponseEntity<Void> {
+        return ResponseEntity.ok().build()
+    }
+
     @PostMapping("/login")
     fun userLogin(@RequestBody loginRequest: LoginRequestDTO): ResponseEntity<LoginResponseDTO> {
         log.debug("Login Request for {}", loginRequest.email)
