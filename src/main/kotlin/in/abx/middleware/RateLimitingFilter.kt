@@ -38,6 +38,8 @@ class RateLimitingFilter : Filter {
         val httpRequest = request as HttpServletRequest
         val httpResponse = response as HttpServletResponse
 
+        response.setHeader("Access-Control-Allow-Credentials", "true")
+
         // Fix 2: Always allow browser preflight OPTIONS requests to bypass rate limiting
         if ("OPTIONS".equals(httpRequest.method, ignoreCase = true)) {
             chain.doFilter(request, response)
@@ -50,13 +52,6 @@ class RateLimitingFilter : Filter {
         if (bucket.tryConsume(1)) {
             chain.doFilter(request, response)
         } else {
-            // Fix 3: Manually append CORS headers when rejecting, otherwise the browser hides this 429 payload
-            httpResponse.setHeader(
-                "Access-Control-Allow-Origin",
-                "http://localhost:3000"
-            )
-            httpResponse.setHeader("Access-Control-Allow-Credentials", "true")
-
             httpResponse.status = 429
             httpResponse.contentType = "application/json"
             httpResponse.characterEncoding = "UTF-8"
