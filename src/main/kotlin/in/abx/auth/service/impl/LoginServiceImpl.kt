@@ -1,7 +1,7 @@
 package `in`.abx.auth.service.impl
 
 import `in`.abx.auth.domain.JwtToken
-import `in`.abx.auth.domain.User
+import `in`.abx.auth.domain.UserLoginMeta
 import `in`.abx.auth.dto.LoginRequestDTO
 import `in`.abx.auth.dto.LoginResponseDTO
 import `in`.abx.auth.service.LoginService
@@ -17,25 +17,32 @@ class LoginServiceImpl : LoginService {
 
     @OptIn(ExperimentalTime::class)
     override fun authenticateUser(request: LoginRequestDTO): LoginResponseDTO {
-        val user = User(
+        val user = UserLoginMeta(
             "1231231313",
             "ABX",
-            "123jh12jdhjeh",
+            "1234",
             true,
             Date.from(Clock.System.now().toJavaInstant())
         )
 
-        return loginUser(user.uuid, user.name, this.provideTokens(""))
+        return loginUser(
+            user.uuid,
+            user.name,
+            user.lastLogin,
+            this.provideTokens(user.name)
+        )
     }
 
     private fun loginUser(
         userId: String,
         userName: String,
+        lastLogin: Date?,
         jwtToken: JwtToken
     ): LoginResponseDTO {
         return LoginResponseDTO(
             userId,
             userName,
+            lastLogin,
             jwtToken
         )
 

@@ -1,4 +1,4 @@
-package `in`.abx.config
+package `in`.abx.middleware
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
@@ -9,9 +9,13 @@ class CorsConfig : WebMvcConfigurer {
 
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:5173")
+            .allowedOrigins("http://localhost:3000")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*")
+            .allowedHeaders(
+                "Content-Type",
+                "X-Client-Header",
+                "access-control-allow-origin"
+            )
             .allowCredentials(true)
     }
 }
