@@ -12,6 +12,6 @@ class AuthController {
 
     @PostMapping("/login")
     fun home(): ResponseEntity<LoginResponseDTO> {
-        return ResponseEntity.ok(LoginResponseDTO("token1", "token2"))
+        return ResponseEntity.ok()
     }
 }
