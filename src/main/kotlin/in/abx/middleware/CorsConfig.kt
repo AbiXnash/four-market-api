@@ -14,6 +14,7 @@ class CorsConfig : WebMvcConfigurer {
             .allowedHeaders(
                 "Content-Type",
                 "X-Client-Header",
+                "X-XSRF-TOKEN",
                 "access-control-allow-origin"
             )
             .allowCredentials(true)
