@@ -5,11 +5,13 @@ import (
 	"os"
 
 	turso "github.com/AbiXnash/four-market-api/internal/db"
+	"github.com/AbiXnash/four-market-api/internal/server"
 	"github.com/joho/godotenv"
 )
 
 func init() {
 	godotenv.Load()
+	server.Serve(os.Getenv("PORT"))
 }
 
 func main() {
