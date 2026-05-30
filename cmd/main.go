@@ -1,24 +1,25 @@
 package main
 
 import (
-	"fmt"
+	"log/slog"
 	"os"
 
 	turso "github.com/AbiXnash/four-market-api/internal/db"
+	"github.com/AbiXnash/four-market-api/internal/logger"
 	"github.com/AbiXnash/four-market-api/internal/server"
 	"github.com/joho/godotenv"
 )
 
 func init() {
-	godotenv.Load()
-	server.Serve(os.Getenv("PORT"))
+	godotenv.Load()                        // loaded .env
+	slog.SetDefault(logger.CustomLogger()) // customize logger
 }
 
 func main() {
-	err := turso.ConnectDB()
+	server.Serve(os.Getenv("PORT")) // start server
+
+	err := turso.ConnectDB() // connects to DB, Turso Sqllite
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println(os.Getenv("PORT"))
 }

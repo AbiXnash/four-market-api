@@ -9,6 +9,7 @@ import (
 func Serve(port string) {
 	slog.Info("Running Server", "port", port)
 	r := gin.Default()
+	r.SetTrustedProxies(nil)
 
 	r.Run(":" + port)
 }
