@@ -22,10 +22,5 @@ func main() {
 	}
 	defer db.DB.Close()
 
-	rdb := db.ConnectRedis()
-	if rdb != nil {
-		defer rdb.Close()
-	}
-
 	server.Serve(os.Getenv("PORT"))
 }

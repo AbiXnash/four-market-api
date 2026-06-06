@@ -14,7 +14,6 @@ var DB *sql.DB
 func ConnectTurso() error {
 	tursoUrl := os.Getenv("TURSO_DATABASE_URL")
 	turoToken := os.Getenv("TURSO_AUTH_TOKEN")
-	slog.Debug("db connection", "url", tursoUrl, "token", turoToken)
 
 	if tursoUrl == "" || turoToken == "" {
 		slog.Warn("db is not configured")
