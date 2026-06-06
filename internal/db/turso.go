@@ -1,4 +1,4 @@
-package turso
+package db
 
 import (
 	"database/sql"
@@ -9,9 +9,12 @@ import (
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
-func ConnectDB() error {
+var DB *sql.DB
+
+func ConnectTurso() error {
 	tursoUrl := os.Getenv("TURSO_DATABASE_URL")
 	turoToken := os.Getenv("TURSO_AUTH_TOKEN")
+	slog.Debug("db connection", "url", tursoUrl, "token", turoToken)
 
 	if tursoUrl == "" || turoToken == "" {
 		slog.Warn("db is not configured")
@@ -20,11 +23,18 @@ func ConnectDB() error {
 
 	url := tursoUrl + "?authToken=" + turoToken
 
-	db, _ := sql.Open("libsql", url)
+	db, err := sql.Open("libsql", url)
+	if err != nil {
+		return err
+	}
+
+	if err := db.Ping(); err != nil {
+		return err
+	}
+
+	DB = db
 
 	slog.Info("Turso Connected.")
-
-	defer db.Close()
 
 	return nil
 }
