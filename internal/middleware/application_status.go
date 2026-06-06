@@ -11,7 +11,7 @@ func ApplicationStatusTracker() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if !states.AppEnabled.Load() {
 			c.AbortWithStatusJSON(http.StatusServiceUnavailable, gin.H{
-				"error": "application  temporarily not available",
+				"error": "Application is temporarily not available. Please try again later.",
 			})
 			return
 		}
