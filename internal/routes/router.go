@@ -13,7 +13,7 @@ func RouterSetup(r *gin.Engine) {
 	r.SetTrustedProxies(nil)
 
 	r.Use(middleware.ApplicationStatusTracker())
-	// r.Use(middleware.RequireHeaders())
+	r.Use(middleware.RequireHeaders())
 
 	r.GET("/", root)
 
