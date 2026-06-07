@@ -7,7 +7,7 @@ import (
 	db "github.com/AbiXnash/four-market-api/internal/db"
 	"github.com/AbiXnash/four-market-api/internal/logger"
 	"github.com/AbiXnash/four-market-api/internal/server"
-	"github.com/AbiXnash/four-market-api/internal/states"
+	"github.com/AbiXnash/four-market-api/internal/status"
 	"github.com/joho/godotenv"
 )
 
@@ -24,10 +24,10 @@ func main() {
 	defer db.DB.Close()
 
 	// Initialize application status (loads current status and starts background monitor)
-	if err := states.RefreshStatus(); err != nil {
+	if err := status.Refresh(); err != nil {
 		slog.Warn("initial application status refresh failed", "error", err)
 	}
-	states.StartStatusMonitor()
+	status.StartMonitor()
 
 	server.Serve(os.Getenv("PORT"))
 }

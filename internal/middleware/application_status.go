@@ -3,13 +3,13 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/AbiXnash/four-market-api/internal/states"
+	"github.com/AbiXnash/four-market-api/internal/status"
 	"github.com/gin-gonic/gin"
 )
 
 func ApplicationStatusTracker() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		enabled := states.AppEnabled.Load()
+		enabled := status.Enabled()
 
 		// Expose the current status via a custom header
 		// Frontend can read this on every response (success or error)
