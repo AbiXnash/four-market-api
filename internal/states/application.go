@@ -12,7 +12,7 @@ import (
 
 var AppEnabled atomic.Bool
 
-func startStatusMonitor() {
+func StartStatusMonitor() {
 	ticker := time.NewTicker(30 * time.Second)
 
 	go func() {
@@ -50,7 +50,7 @@ func getApplicationStatus() (bool, error) {
 			status = false
 			lastModified = "UNKNOWN"
 		} else {
-			panic(err)
+			return false, err
 		}
 	}
 
@@ -58,7 +58,7 @@ func getApplicationStatus() (bool, error) {
 		slog.Debug("Application Run Status: Operational", "lastModified", lastModified)
 	} else {
 		slog.Debug(
-			"Application startup blocked",
+			"Application is offline",
 			"status", "not_operational",
 			"lastModified", lastModified,
 			"action", "server_startup_stopped",
