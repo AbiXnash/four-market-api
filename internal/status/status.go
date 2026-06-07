@@ -24,6 +24,8 @@ func Refresh() error {
 		return err
 	}
 
+	slog.Debug("Refreshing Application status", "currentStatus", Enabled())
+
 	enabled.Store(status)
 	return nil
 }

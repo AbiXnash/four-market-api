@@ -28,6 +28,7 @@ func RouterSetup(r *gin.Engine) {
 }
 
 func applicationStatus(c *gin.Context) {
+	status.Refresh()
 	enabled := status.Enabled()
 
 	slog.Debug("Application status is checked",
